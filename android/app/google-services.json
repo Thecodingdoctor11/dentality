@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "296560098854",
+    "project_id": "i-dentify-fce91",
+    "storage_bucket": "i-dentify-fce91.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:296560098854:android:0bcb6c852a2b3578c9f0e7",
+        "android_client_info": {
+          "package_name": "com.example.dentality"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBpSKsoI0aBRqX-IAPZfsfWpcTHxdavdRI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
