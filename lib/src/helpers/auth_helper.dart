@@ -31,7 +31,7 @@ class AuthHelper {
         password: password,
       );
     } catch (e) {
-      print("Error signing in with email and password: $e");
+      print("Error signing up with email and password: $e");
       return null;
     }
   }

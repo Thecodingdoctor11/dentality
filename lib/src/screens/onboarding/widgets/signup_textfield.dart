@@ -25,9 +25,11 @@ class SignupTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: TextFormField(
+        style: textTheme.bodySmall,
         onSaved: onSaved,
         keyboardType: keyboardType ?? TextInputType.text,
         key: ValueKey(hint),
@@ -35,10 +37,14 @@ class SignupTextField extends StatelessWidget {
         obscureText: obsecureText,
         controller: controller,
         decoration: InputDecoration(
+          contentPadding:
+              EdgeInsets.symmetric(vertical: 4.sp, horizontal: 8.sp),
           suffixIcon: icon,
-          errorStyle: TextStyle(fontSize: 14.sp),
+          errorStyle: TextStyle(
+            fontSize: 14.sp,
+          ),
           hintText: hint,
-          hintStyle: const TextStyle(color: AppColors.green),
+          hintStyle: textTheme.bodySmall?.copyWith(color: AppColors.green),
           enabledBorder: OutlineInputBorder(
               borderSide: const BorderSide(color: AppColors.green),
               borderRadius: BorderRadius.circular(20)),

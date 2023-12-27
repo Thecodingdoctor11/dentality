@@ -1,3 +1,4 @@
+import 'package:dentality/src/core/routing/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
@@ -59,31 +60,12 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: ListTile(
-                        onTap: () => Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => Scaffold(
-                              appBar: AppBar(
-                                title: Text(patientData.name ?? ''),
-                              ),
-                              body: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Column(children: [
-                                  CircleAvatar(
-                                    backgroundColor: AppColors.darkTeal,
-                                    child: Text('hello, world'),
-                                    radius: 50.sp,
-                                  )
-                                ]),
-                              ),
-                            ),
-                          ),
-                        ),
+                        onTap: () => Navigator.of(context).pushNamed(
+                            Routes.patientScreen,
+                            arguments: patientData),
                         shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(20),
-                                topRight: Radius.circular(30),
-                                bottomLeft: Radius.circular(20),
-                                bottomRight: Radius.circular(30))),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(30))),
                         tileColor: AppColors.teal,
                         title: Text(
                           '${appointment.patientName}, ${appointment.patient.age} years',

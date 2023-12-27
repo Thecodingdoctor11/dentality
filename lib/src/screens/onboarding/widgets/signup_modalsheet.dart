@@ -106,31 +106,29 @@ class _SignupModalSheetState extends State<SignupModalSheet> {
                     firstNameController: _firstNameController,
                     lastNameController: _lastNameController,
                   ),
-                  Flexible(
-                    child: LongButton(
-                      textTheme: textTheme,
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                                content: Text(!_isLogin
-                                    ? 'Registration Successful.'
-                                    : 'Welcome Back.'),
-                                backgroundColor: AppColors.teal),
-                          );
-                          _formKey.currentState?.save();
-                          trySubmit(
-                              _emailController.text, _passwordController.text);
+                  LongButton(
+                    textTheme: textTheme,
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                              content: Text(!_isLogin
+                                  ? 'Registration Successful.'
+                                  : 'Welcome Back.'),
+                              backgroundColor: AppColors.teal),
+                        );
+                        _formKey.currentState?.save();
+                        trySubmit(
+                            _emailController.text, _passwordController.text);
 
-                          Navigator.pushNamedAndRemoveUntil(
-                            context,
-                            Routes.homeScreen,
-                            (route) => false,
-                          );
-                        }
-                      },
-                      title: _isLogin ? 'Login' : 'Sign Up',
-                    ),
+                        Navigator.pushNamedAndRemoveUntil(
+                          context,
+                          Routes.homeScreen,
+                          (route) => false,
+                        );
+                      }
+                    },
+                    title: _isLogin ? 'Login' : 'Sign Up',
                   ),
                   TextButton(
                     onPressed: () {

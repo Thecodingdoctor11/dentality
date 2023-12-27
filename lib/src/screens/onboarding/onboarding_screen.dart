@@ -36,15 +36,6 @@ class OnboardingScreen extends StatelessWidget {
                   margin: EdgeInsets.only(top: 50.sp),
                   child: Stack(
                     children: [
-                      Positioned(
-                        left: 5.sp,
-                        child: Text(
-                          '🦷',
-                          style: TextStyle(
-                            fontSize: 275.sp,
-                          ),
-                        ),
-                      ),
                       Image.asset('assets/images/i-Dentify_onboarding.png'),
                       Positioned(
                         bottom: 0.h,

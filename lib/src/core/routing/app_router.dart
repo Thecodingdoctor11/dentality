@@ -2,6 +2,7 @@ import 'package:dentality/src/core/routing/routes.dart';
 import 'package:dentality/src/screens/appointments/appointments_screen.dart';
 import 'package:dentality/src/screens/home/home_screen.dart';
 import 'package:dentality/src/screens/onboarding/onboarding_screen.dart';
+import 'package:dentality/src/screens/patient%20screen/patient_screen.dart';
 import 'package:flutter/material.dart';
 
 class AppRouter {
@@ -19,9 +20,13 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => const AppointmentsScreen(),
         );
+      case Routes.patientScreen:
+        return MaterialPageRoute(
+            builder: (_) => const PatientScreen(), settings: settings);
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(
+            appBar: AppBar(),
             body: Center(
               child: Text('There is no screen defined for ${settings.name}'),
             ),

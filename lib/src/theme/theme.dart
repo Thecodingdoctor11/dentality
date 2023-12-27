@@ -29,6 +29,7 @@ class AppThemeData {
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
+            backgroundColor: AppColors.darkTeal,
             shape: RoundedRectangleBorder(borderRadius: borderRadius),
             shadowColor: AppColors.teal,
             padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
@@ -41,6 +42,7 @@ class AppThemeData {
       )),
       scaffoldBackgroundColor: AppColors.lightBlue,
       appBarTheme: AppBarTheme(
+        color: AppColors.darkTeal,
         titleSpacing: 0,
         shadowColor: AppColors.teal,
         centerTitle: false,
