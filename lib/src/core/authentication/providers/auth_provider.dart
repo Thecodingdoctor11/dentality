@@ -5,4 +5,4 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 final authRepoProvider =
     Provider<AuthRepo>((ref) => AuthRepo(FirebaseAuth.instance));
 final authStateProvider =
-    StreamProvider<User?>((ref) => ref.read(authRepoProvider).authStateChange);
+    StreamProvider<User?>((ref) => ref.watch(authRepoProvider).authStateChange);

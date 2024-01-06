@@ -1,13 +1,22 @@
+import 'package:dentality/src/core/authentication/login_controller.dart';
+import 'package:dentality/src/core/authentication/login_state.dart';
 import 'package:dentality/src/screens/onboarding/widgets/signup_modalsheet.dart';
 import 'package:dentality/src/widgets/long_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class OnboardingScreen extends StatelessWidget {
+class OnboardingScreen extends ConsumerWidget {
   const OnboardingScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ref) {
+    ref.listen(loginControllerProvider, (previous, state) {
+      if (state is LoginStateError) {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text(state.error)));
+      }
+    });
     final textTheme = Theme.of(context).textTheme;
     return Scaffold(
       backgroundColor: Colors.white,

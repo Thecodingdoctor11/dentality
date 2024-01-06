@@ -1,15 +1,15 @@
 import 'package:dentality/firebase_options.dart';
+import 'package:dentality/src/core/authentication/auth_checker.dart';
 import 'package:dentality/src/core/routing/app_router.dart';
-import 'package:dentality/src/screens/onboarding/onboarding_screen.dart';
 import 'package:dentality/src/theme/theme.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(ProviderScope(child: MainApp(appRouter: AppRouter())));
 }
 
@@ -34,7 +34,7 @@ class MainApp extends ConsumerWidget {
           onGenerateRoute: appRouter.generateRoute,
         );
       },
-      child: const OnboardingScreen(),
+      child: const AuthChecker(),
     );
   }
 }

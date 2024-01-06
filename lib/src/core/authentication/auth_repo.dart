@@ -21,6 +21,23 @@ class AuthRepo {
     }
   }
 
+  Future<User?> createUserWithEmailAndPassword(
+      String email, String password) async {
+    try {
+      final result = await _auth.createUserWithEmailAndPassword(
+          email: email, password: password);
+      return result.user;
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        throw AuthException('User not found');
+      } else if (e.code == 'wrong-password') {
+        throw AuthException('Wrong password');
+      } else {
+        throw AuthException('An error occured, please try again later');
+      }
+    }
+  }
+
   Future<void> signOut() async {
     await _auth.signOut();
   }

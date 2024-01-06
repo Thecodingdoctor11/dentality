@@ -10,8 +10,8 @@ class AuthChecker extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final _authState = ref.watch(authStateProvider);
-    return _authState.when(
+    final authState = ref.watch(authStateProvider);
+    return authState.when(
         data: (user) {
           if (user != null) {
             return const HomeScreen();
