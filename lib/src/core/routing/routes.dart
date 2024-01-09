@@ -6,4 +6,5 @@ class Routes {
   static const String materialsScreen = '/Materials';
   static const String expensesScreen = '/Expenses';
   static const String patientScreen = '/Patient';
+  static const String historyScreen = '/History';
 }

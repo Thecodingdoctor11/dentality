@@ -1,3 +1,4 @@
+import 'package:dentality/src/core/routing/routes.dart';
 import 'package:dentality/src/helpers/sizer.dart';
 import 'package:dentality/src/screens/appointments/appointments_screen.dart';
 import 'package:dentality/src/theme/colors.dart';
@@ -22,7 +23,7 @@ class _PatientScreenState extends State<PatientScreen> {
         title: Text(args.name ?? ''),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: EdgeInsets.all(8.0.sp),
         child: Column(children: [
           Row(
             children: [
@@ -31,17 +32,25 @@ class _PatientScreenState extends State<PatientScreen> {
                 radius: 50.sp,
                 child: Text(args.name ?? ''),
               ),
-              const Sizer(
-                horizontal: 6.0,
+              Sizer(
+                horizontal: 6.0.sp,
               ),
-              const Expanded(
-                child: Text('Phone number: 01000000000'),
+              Expanded(
+                child: Column(
+                  children: [
+                    Text(
+                      'Phone number: ${args.phoneNumber ?? 'Unknown'}',
+                      style: textTheme.bodyMedium,
+                    ),
+                    Text('Email: ${args.email ?? 'Unknown'}')
+                  ],
+                ),
               ),
               IconButton(onPressed: () {}, icon: const Icon(Icons.edit)),
             ],
           ),
-          const Sizer(
-            vertical: 8,
+          Sizer(
+            vertical: 8.0.sp,
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -105,7 +114,16 @@ class _PatientScreenState extends State<PatientScreen> {
                   Text('Medical History',
                       style: textTheme.bodyLarge
                           ?.copyWith(fontWeight: FontWeight.bold)),
-                  Text('No significant findings')
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text('No significant findings'),
+                      IconButton(
+                          onPressed: () => Navigator.pushNamed(
+                              context, Routes.historyScreen),
+                          icon: const Icon(Icons.arrow_forward))
+                    ],
+                  )
                 ],
               ),
               Column(
