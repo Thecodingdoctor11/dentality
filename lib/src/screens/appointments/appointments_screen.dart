@@ -18,7 +18,7 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
       name: 'John Doe',
       gender: Gender.male,
       history: MedicalHistory.medicallyFree,
-      phoneNumber: 01000101101,
+      phoneNumber: '01000101101',
       email: 'test@test.com');
   late final Appointment appointment = Appointment(
       patient: patientData,
@@ -122,7 +122,7 @@ class Patient {
   int? age;
   Gender? gender;
   MedicalHistory? history;
-  int? phoneNumber;
+  String? phoneNumber;
   String? email;
   String? picture;
 

@@ -21,9 +21,9 @@ class HomeViewScreenState extends ConsumerState {
     'Materials',
     'Expenses',
   ];
-  final auth = FirebaseAuth.instance.currentUser;
   @override
   Widget build(BuildContext context) {
+    final auth = FirebaseAuth.instance.currentUser;
     final textTheme = Theme.of(context).textTheme;
     String name = 'Muhammad';
     final nameProvider = StateProvider<String>((ref) => name);

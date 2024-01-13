@@ -11,6 +11,7 @@ class HistoryScreen extends StatefulWidget {
 
 class _HistoryScreenState extends State<HistoryScreen> {
   final menuController = TextEditingController();
+  late final otherController = TextEditingController();
   List<String> diseases = [];
   bool other = false;
   @override
@@ -45,12 +46,13 @@ class _HistoryScreenState extends State<HistoryScreen> {
                       vertical: 16.0.sp, horizontal: 8.0.sp),
                   child: DropdownMenu(
                       onSelected: (value) {
-                        if (value == 3) {
-                          setState(() {
-                            other == true;
-                          });
-                          print('object');
-                        }
+                        setState(() {
+                          if (value == 3) {
+                            other = true;
+                          } else {
+                            other = false;
+                          }
+                        });
                       },
                       label: const Text('Chronic Diseases'),
                       controller: menuController,
@@ -77,49 +79,73 @@ class _HistoryScreenState extends State<HistoryScreen> {
                       print(diseases);
 
                       setState(() {
-                        if (!diseases.contains(menuController.text)) {
-                          diseases.add(menuController.text);
+                        if (!diseases.contains(menuController.text) &&
+                            menuController.text.isNotEmpty) {
+                          diseases.add(other
+                              ? otherController.text
+                              : menuController.text);
+                          // other = true;
                         }
                       });
 
                       print(diseases.indexOf(menuController.text));
+                      print(other);
                     },
                   ),
                 )
               ],
             ),
-            if (other) Text('data'),
+            if (other)
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                child: TextFormField(
+                    validator: (value) {},
+                    style: textTheme.bodySmall,
+                    controller: otherController,
+                    decoration: InputDecoration(
+                      hintText: 'Add Condition Details',
+                      hintStyle: textTheme.bodySmall,
+                    )),
+              ),
             Padding(
               padding: EdgeInsets.all(8.0.sp),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Diseases:',
+                    'Conditions:',
                     style: textTheme.displaySmall,
                   ),
                   Padding(
                     padding: EdgeInsets.all(8.0.sp),
                     child: SizedBox(
                       height: 300,
-                      child: ListView.builder(
-                        itemBuilder: (context, index) {
-                          return Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text('• ${diseases[index]}'),
-                              IconButton(
-                                  onPressed: () {
-                                    setState(() {
-                                      diseases.removeAt(index);
-                                    });
-                                  },
-                                  icon: Icon(Icons.delete))
-                            ],
-                          );
-                        },
-                        itemCount: diseases.length,
-                      ),
+                      child: diseases.isEmpty
+                          ? const Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('No signifcant findings'),
+                              ],
+                            )
+                          : ListView.builder(
+                              itemBuilder: (context, index) {
+                                return Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text('• ${diseases[index]}'),
+                                    IconButton(
+                                        onPressed: () {
+                                          setState(() {
+                                            diseases.removeAt(index);
+                                          });
+                                        },
+                                        icon: Icon(Icons.delete))
+                                  ],
+                                );
+                              },
+                              itemCount: diseases.length,
+                            ),
                     ),
                   ),
                 ],
