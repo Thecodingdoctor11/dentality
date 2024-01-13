@@ -1,4 +1,5 @@
 import 'package:dentality/src/core/routing/routes.dart';
+import 'package:dentality/src/screens/add%20appointment/add_appointment_screen.dart';
 import 'package:dentality/src/screens/appointments/appointments_screen.dart';
 import 'package:dentality/src/screens/history/history_screen.dart';
 import 'package:dentality/src/screens/home/home_screen.dart';
@@ -24,6 +25,10 @@ class AppRouter {
       case Routes.historyScreen:
         return MaterialPageRoute(
           builder: (_) => const HistoryScreen(),
+        );
+      case Routes.addAppointmentScreen:
+        return MaterialPageRoute(
+          builder: (_) => const AddAppointmentScreen(),
         );
       case Routes.patientScreen:
         return MaterialPageRoute(

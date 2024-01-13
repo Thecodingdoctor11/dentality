@@ -1,9 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dentality/firebase_options.dart';
 import 'package:dentality/src/core/authentication/providers/auth_provider.dart';
+import 'package:dentality/src/core/routing/routes.dart';
 import 'package:dentality/src/theme/colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -25,7 +24,6 @@ class HomeViewScreenState extends ConsumerState {
   final auth = FirebaseAuth.instance.currentUser;
   @override
   Widget build(BuildContext context) {
-    Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
     final textTheme = Theme.of(context).textTheme;
     String name = 'Muhammad';
     final nameProvider = StateProvider<String>((ref) => name);
@@ -38,9 +36,6 @@ class HomeViewScreenState extends ConsumerState {
             IconButton(
               onPressed: () {
                 ref.read(authRepoProvider).signOut();
-
-                // AuthHelper.signOut();
-                // Navigator.of(context).pushNamed(Routes.onboardingScreen);
               },
               icon: const Icon(Icons.settings),
             )
@@ -141,7 +136,9 @@ class HomeViewScreenState extends ConsumerState {
                       ),
                     ],
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, Routes.addAppointmentScreen);
+                  },
                 ),
                 TextButton(
                   child: Row(
