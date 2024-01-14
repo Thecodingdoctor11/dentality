@@ -140,24 +140,24 @@ class HomeViewScreenState extends ConsumerState {
                     Navigator.pushNamed(context, Routes.addAppointmentScreen);
                   },
                 ),
-                TextButton(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Add Patient',
-                        style: textTheme.headlineMedium
-                            ?.copyWith(color: AppColors.green),
-                      ),
-                      Icon(
-                        Icons.add_reaction_outlined,
-                        size: 30.sp,
-                        color: AppColors.green,
-                      ),
-                    ],
-                  ),
-                  onPressed: () {},
-                ),
+                // TextButton(
+                //   child: Row(
+                //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //     children: [
+                //       Text(
+                //         'Add Patient',
+                //         style: textTheme.headlineMedium
+                //             ?.copyWith(color: AppColors.green),
+                //       ),
+                //       Icon(
+                //         Icons.add_reaction_outlined,
+                //         size: 30.sp,
+                //         color: AppColors.green,
+                //       ),
+                //     ],
+                //   ),
+                //   onPressed: () {},
+                // ),
               ],
             ),
           ),

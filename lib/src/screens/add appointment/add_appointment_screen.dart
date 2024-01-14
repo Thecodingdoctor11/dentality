@@ -2,6 +2,7 @@ import 'package:dentality/src/helpers/sizer.dart';
 import 'package:dentality/src/theme/colors.dart';
 // import 'package:dentality/src/theme/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class AddAppointmentScreen extends StatefulWidget {
   const AddAppointmentScreen({super.key});
@@ -11,6 +12,8 @@ class AddAppointmentScreen extends StatefulWidget {
 }
 
 class _AddAppointmentScreenState extends State<AddAppointmentScreen> {
+  DateTime? selectedDate;
+  TimeOfDay? selectedTime;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,19 +27,23 @@ class _AddAppointmentScreenState extends State<AddAppointmentScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
+              const Row(
                 children: [
-                  Text('Name'),
                   Sizer(
                     horizontal: 8,
                   ),
-                  Expanded(child: TextField()),
+                  Expanded(
+                      child: TextField(
+                    decoration: InputDecoration(
+                      hintText: 'Name',
+                    ),
+                  )),
                   Sizer(
                     horizontal: 8,
                   ),
                 ],
               ),
-              Row(
+              const Row(
                 children: [
                   Text('Age'),
                   Sizer(
@@ -48,7 +55,7 @@ class _AddAppointmentScreenState extends State<AddAppointmentScreen> {
                   ),
                 ],
               ),
-              Row(
+              const Row(
                 children: [
                   Text('Phone Number'),
                   Sizer(
@@ -62,13 +69,36 @@ class _AddAppointmentScreenState extends State<AddAppointmentScreen> {
               ),
               Row(
                 children: [
-                  Text('Date'),
+                  Text(selectedDate != null
+                      ? '${DateFormat.MMMd().format(selectedDate!)}, ${selectedTime != null ? selectedTime?.format(context) : 'Please pick a time'}'
+                      : 'Select date'),
                   IconButton(
-                    onPressed: () => showDatePicker(
+                    onPressed: () async {
+                      final pickedDate = await showDatePicker(
+                        builder: (_, child) {
+                          return Theme(
+                            data: ThemeData.from(
+                              colorScheme: Theme.of(context).colorScheme,
+                            ),
+                            child: child!,
+                          );
+                        },
                         context: context,
                         firstDate: DateTime(1990),
-                        lastDate: DateTime(2099)),
-                    icon: Icon(Icons.calendar_month),
+                        lastDate: DateTime(2099),
+                      );
+                      if (context.mounted) {
+                        final pickedTime = await showTimePicker(
+                            context: context, initialTime: TimeOfDay.now());
+                        setState(() {
+                          selectedTime = pickedTime;
+                        });
+                      }
+                      setState(() {
+                        selectedDate = pickedDate;
+                      });
+                    },
+                    icon: const Icon(Icons.calendar_month),
                     color: AppColors.darkTeal,
                     iconSize: 30,
                   ),

@@ -14,6 +14,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
   late final otherController = TextEditingController();
   List<String> diseases = [];
   bool other = false;
+  final _otherFieldKey = GlobalKey<FormFieldState>();
   @override
   void dispose() {
     menuController.dispose();
@@ -99,7 +100,13 @@ class _HistoryScreenState extends State<HistoryScreen> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 child: TextFormField(
-                    validator: (value) {},
+                    key: _otherFieldKey,
+                    validator: (value) {
+                      if (otherController.text.isEmpty) {
+                        'Please enter condition';
+                      }
+                      return null;
+                    },
                     style: textTheme.bodySmall,
                     controller: otherController,
                     decoration: InputDecoration(
