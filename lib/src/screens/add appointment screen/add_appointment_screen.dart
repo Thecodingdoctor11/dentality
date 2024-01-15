@@ -2,6 +2,7 @@ import 'package:dentality/src/helpers/sizer.dart';
 import 'package:dentality/src/theme/colors.dart';
 // import 'package:dentality/src/theme/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 
 class AddAppointmentScreen extends StatefulWidget {
@@ -27,47 +28,68 @@ class _AddAppointmentScreenState extends State<AddAppointmentScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Row(
+              Row(
                 children: [
                   Sizer(
-                    horizontal: 8,
+                    horizontal: 8.sp,
                   ),
-                  Expanded(
+                  const Expanded(
                       child: TextField(
                     decoration: InputDecoration(
                       hintText: 'Name',
                     ),
                   )),
                   Sizer(
-                    horizontal: 8,
-                  ),
-                ],
-              ),
-              const Row(
-                children: [
-                  Text('Age'),
-                  Sizer(
-                    horizontal: 8,
-                  ),
-                  Expanded(child: TextField()),
-                  Sizer(
-                    horizontal: 8,
-                  ),
-                ],
-              ),
-              const Row(
-                children: [
-                  Text('Phone Number'),
-                  Sizer(
-                    horizontal: 8,
-                  ),
-                  Expanded(child: TextField()),
-                  Sizer(
-                    horizontal: 8,
+                    horizontal: 8.sp,
                   ),
                 ],
               ),
               Row(
+                children: [
+                  Sizer(
+                    horizontal: 8.sp,
+                  ),
+                  const Expanded(
+                      child: TextField(
+                    decoration: InputDecoration(
+                      hintText: 'Age',
+                    ),
+                  )),
+                  Sizer(
+                    horizontal: 8.sp,
+                  ),
+                  const Expanded(
+                      child: TextField(
+                    decoration: InputDecoration(
+                      hintText: 'Phone Number',
+                    ),
+                  )),
+                  Sizer(
+                    horizontal: 8.sp,
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  Sizer(
+                    horizontal: 8.sp,
+                  ),
+                  const Expanded(
+                      child: TextField(
+                    decoration: InputDecoration(
+                      hintText: 'Email',
+                    ),
+                  )),
+                  Sizer(
+                    horizontal: 8.sp,
+                  ),
+                ],
+              ),
+              Sizer(
+                vertical: 20.sp,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(selectedDate != null
                       ? '${DateFormat.MMMd().format(selectedDate!)}, ${selectedTime != null ? selectedTime?.format(context) : 'Please pick a time'}'
@@ -86,6 +108,7 @@ class _AddAppointmentScreenState extends State<AddAppointmentScreen> {
                         context: context,
                         firstDate: DateTime(1990),
                         lastDate: DateTime(2099),
+                        initialDate: DateTime.now(),
                       );
                       if (context.mounted) {
                         final pickedTime = await showTimePicker(

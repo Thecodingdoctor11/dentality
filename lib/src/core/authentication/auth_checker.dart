@@ -1,5 +1,5 @@
 import 'package:dentality/src/core/authentication/providers/auth_provider.dart';
-import 'package:dentality/src/screens/home/home_screen.dart';
+import 'package:dentality/src/screens/home%20screen/home_screen.dart';
 import 'package:dentality/src/screens/onboarding/onboarding_screen.dart';
 import 'package:dentality/src/screens/splash%20screen/splash_screen.dart';
 import 'package:flutter/material.dart';

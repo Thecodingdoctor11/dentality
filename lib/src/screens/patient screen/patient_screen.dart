@@ -1,6 +1,7 @@
 import 'package:dentality/src/core/routing/routes.dart';
 import 'package:dentality/src/helpers/sizer.dart';
-import 'package:dentality/src/screens/appointments/appointments_screen.dart';
+import 'package:dentality/src/providers/patients_provider.dart';
+import 'package:dentality/src/screens/appointments%20screen/appointments_screen.dart';
 import 'package:dentality/src/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -46,7 +47,11 @@ class _PatientScreenState extends State<PatientScreen> {
                   ],
                 ),
               ),
-              IconButton(onPressed: () {}, icon: const Icon(Icons.edit)),
+              IconButton(
+                  onPressed: () {
+                    fetchPatients();
+                  },
+                  icon: const Icon(Icons.edit)),
             ],
           ),
           Sizer(
