@@ -1,19 +1,21 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dentality/src/screens/appointments%20screen/appointments_screen.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:dentality/src/core/models/patient.dart';
+// import 'package:dentality/src/screens/appointments%20screen/appointments_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 List<Patient> patientsList = [];
-Provider<List<Patient>> patientsListProvider = Provider((ref) => patientsList);
+FutureProvider<List<Patient>> patientsListProvider =
+    FutureProvider((ref) => patientsList);
 fetchPatients() async {
-  List<Map<String, dynamic>> tempList = [];
+  List<Patient> tempList = [];
   final patientData = await FirebaseFirestore.instance
       .collection('users')
       .doc('xtuUmcVVwQIp3bGqnzJj')
       .collection('patients')
       .get();
   patientData.docs.forEach((element) {
-    tempList.add(element.data());
+    tempList.add(Patient.fromJson(element.data()));
   });
-  print(tempList[0]);
+  patientsList = tempList;
+  print(patientsList.map((e) => e.age));
 }

@@ -1,5 +1,7 @@
 import 'package:dentality/src/core/routing/routes.dart';
+import 'package:dentality/src/providers/patients_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 
@@ -13,7 +15,7 @@ class AppointmentsScreen extends StatefulWidget {
 }
 
 class _AppointmentsScreenState extends State<AppointmentsScreen> {
-  final Patient patientData = Patient(
+  final patientData = Patient(
       age: 20,
       name: 'John Doe',
       gender: Gender.male,
@@ -55,39 +57,48 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
             Flexible(
               child: Material(
                 borderRadius: BorderRadius.circular(20),
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: 50,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: ListTile(
-                        onTap: () => Navigator.of(context).pushNamed(
-                            Routes.patientScreen,
-                            arguments: patientData),
-                        shape: const RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(30))),
-                        tileColor: AppColors.teal,
-                        title: Text(
-                          '${appointment.patientName}, ${appointment.patient.age} years',
-                          style: textTheme.headlineSmall
-                              ?.copyWith(fontSize: 16.sp),
-                        ),
-                        leading: Text(
-                          DateFormat.MMMd().add_jm().format(
-                                DateTime.now(),
+                child: Consumer(
+                  builder: (context, ref, child) => ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: 50,
+                    itemBuilder: (context, index) {
+                      fetchPatients();
+                      return ref.watch(patientsListProvider).when(
+                            data: (data) => Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: ListTile(
+                                onTap: () => Navigator.of(context).pushNamed(
+                                    Routes.patientScreen,
+                                    arguments: patientData),
+                                shape: const RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(30))),
+                                tileColor: AppColors.teal,
+                                title: Text(
+                                  '${ref.watch(patientsListProvider)}, ${appointment.patient.age} years',
+                                  style: textTheme.headlineSmall
+                                      ?.copyWith(fontSize: 16.sp),
+                                ),
+                                leading: Text(
+                                  DateFormat.MMMd().add_jm().format(
+                                        DateTime.now(),
+                                      ),
+                                  style: textTheme.bodySmall?.copyWith(
+                                      fontSize: 14.sp,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                trailing: IconButton(
+                                  icon: const Icon(Icons.more_vert_outlined),
+                                  onPressed: () {},
+                                ),
                               ),
-                          style: textTheme.bodySmall?.copyWith(
-                              fontSize: 14.sp, fontWeight: FontWeight.bold),
-                        ),
-                        trailing: IconButton(
-                          icon: const Icon(Icons.more_vert_outlined),
-                          onPressed: () {},
-                        ),
-                      ),
-                    );
-                  },
+                            ),
+                            error: (error, stackTrace) =>
+                                Text('Error loading data'),
+                            loading: () => CircularProgressIndicator(),
+                          );
+                    },
+                  ),
                 ),
               ),
             ),
